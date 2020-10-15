@@ -23,13 +23,13 @@
 
 	/* Navbar Scripts */
 	// jQuery to collapse the navbar on scroll
-    $(window).on('scroll load', function() {
-		if ($(".navbar").offset().top > 20) {
-			$(".fixed-top").addClass("top-nav-collapse");
-		} else {
-			$(".fixed-top").removeClass("top-nav-collapse");
-		}
-    });
+    // $(window).on('scroll load', function() {
+		// if ($(".navbar").offset().top > 20) {
+		// 	$(".fixed-top").addClass("top-nav-collapse");
+		// } else {
+		// 	$(".fixed-top").removeClass("top-nav-collapse");
+		// }
+    // });
 
 	// jQuery for page scrolling feature - requires jQuery Easing plugin
 	$(function() {
@@ -258,11 +258,12 @@
 		var name = $("#cname").val();
 		var email = $("#cemail").val();
         var message = $("#cmessage").val();
-        var terms = $("#cterms").val();
+        // var terms = $("#cterms").val();
         $.ajax({
             type: "POST",
             url: "php/contactform-process.php",
-            data: "name=" + name + "&email=" + email + "&message=" + message + "&terms=" + terms,
+            // data: "name=" + name + "&email=" + email + "&message=" + message + "&terms=" + terms,
+            data: "name=" + name + "&email=" + email + "&message=" + message,
             success: function(text) {
                 if (text == "success") {
                     cformSuccess();
@@ -298,60 +299,60 @@
 
 
     /* Privacy Form */
-    $("#privacyForm").validator().on("submit", function(event) {
-    	if (event.isDefaultPrevented()) {
-            // handle the invalid form...
-            pformError();
-            psubmitMSG(false, "Please fill all fields!");
-        } else {
-            // everything looks good!
-            event.preventDefault();
-            psubmitForm();
-        }
-    });
+    // $("#privacyForm").validator().on("submit", function(event) {
+    // 	if (event.isDefaultPrevented()) {
+    //         // handle the invalid form...
+    //         pformError();
+    //         psubmitMSG(false, "Please fill all fields!");
+    //     } else {
+    //         // everything looks good!
+    //         event.preventDefault();
+    //         psubmitForm();
+    //     }
+    // });
 
-    function psubmitForm() {
-        // initiate variables with form content
-		var name = $("#pname").val();
-		var email = $("#pemail").val();
-        var select = $("#pselect").val();
-        var terms = $("#pterms").val();
+  //   function psubmitForm() {
+  //       // initiate variables with form content
+	// 	var name = $("#pname").val();
+	// 	var email = $("#pemail").val();
+  //       var select = $("#pselect").val();
+  //       var terms = $("#pterms").val();
+  //
+  //       $.ajax({
+  //           type: "POST",
+  //           url: "php/privacyform-process.php",
+  //           data: "name=" + name + "&email=" + email + "&select=" + select + "&terms=" + terms,
+  //           success: function(text) {
+  //               if (text == "success") {
+  //                   pformSuccess();
+  //               } else {
+  //                   pformError();
+  //                   psubmitMSG(false, text);
+  //               }
+  //           }
+  //       });
+	// }
 
-        $.ajax({
-            type: "POST",
-            url: "php/privacyform-process.php",
-            data: "name=" + name + "&email=" + email + "&select=" + select + "&terms=" + terms,
-            success: function(text) {
-                if (text == "success") {
-                    pformSuccess();
-                } else {
-                    pformError();
-                    psubmitMSG(false, text);
-                }
-            }
-        });
-	}
-
-    function pformSuccess() {
-        $("#privacyForm")[0].reset();
-        psubmitMSG(true, "Request Submitted!");
-        $("input").removeClass('notEmpty'); // resets the field label after submission
-    }
-
-    function pformError() {
-        $("#privacyForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-            $(this).removeClass();
-        });
-	}
-
-    function psubmitMSG(valid, msg) {
-        if (valid) {
-            var msgClasses = "h3 text-center tada animated";
-        } else {
-            var msgClasses = "h3 text-center";
-        }
-        $("#pmsgSubmit").removeClass().addClass(msgClasses).text(msg);
-    }
+  //   function pformSuccess() {
+  //       $("#privacyForm")[0].reset();
+  //       psubmitMSG(true, "Request Submitted!");
+  //       $("input").removeClass('notEmpty'); // resets the field label after submission
+  //   }
+  //
+  //   function pformError() {
+  //       $("#privacyForm").removeClass().addClass('shake animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+  //           $(this).removeClass();
+  //       });
+	// }
+  //
+  //   function psubmitMSG(valid, msg) {
+  //       if (valid) {
+  //           var msgClasses = "h3 text-center tada animated";
+  //       } else {
+  //           var msgClasses = "h3 text-center";
+  //       }
+  //       $("#pmsgSubmit").removeClass().addClass(msgClasses).text(msg);
+  //   }
 
 
     /* Back To Top Button */
