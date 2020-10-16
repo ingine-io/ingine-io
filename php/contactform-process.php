@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Headers: Authorization, Content-Type");
+header("Access-Control-Allow-Origin: *");
+
 $errorMSG = "";
 
 if (empty($_POST["name"])) {
