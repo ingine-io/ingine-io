@@ -3,22 +3,6 @@
    Created: Mar 2019
    Description: Custom JS file
 */
-(function() {
-    var cors_api_host = 'cors-anywhere.herokuapp.com';
-    var cors_api_url = 'https://' + cors_api_host + '/';
-    var slice = [].slice;
-    var origin = window.location.protocol + '//' + window.location.host;
-    var open = XMLHttpRequest.prototype.open;
-    XMLHttpRequest.prototype.open = function() {
-        var args = slice.call(arguments);
-        var targetOrigin = /^https?:\/\/([^\/]+)/i.exec(args[1]);
-        if (targetOrigin && targetOrigin[0].toLowerCase() !== origin &&
-            targetOrigin[1] !== cors_api_host) {
-            args[1] = cors_api_url + args[1];
-        }
-        return open.apply(this, args);
-    };
-})();
 
 (function($) {
     "use strict";
@@ -270,24 +254,38 @@
 
     function csubmitForm() {
         // initiate variables with form content
-		var name = $("#cname").val();
-		var email = $("#cemail").val();
+  	var name = $("#cname").val();
+  	var email = $("#cemail").val();
         var message = $("#cmessage").val();
+
+      	if(name !== null && name !== '' && email !== null && email !== '') {
+        	var link = "mailto:contact@ingine.io"
+                     + "?subject=" + encodeURIComponent(name)
+                     + "&body=" + encodeURIComponent(message);
+
+        	window.location.href = link;
+        	cformSuccess();
+      	} else {
+          	cformError();
+      	}
+
+
+
         // var terms = $("#cterms").val();
-        $.ajax({
-            type: "POST",
-            url: "php/contactform-process.php",
-            // data: "name=" + name + "&email=" + email + "&message=" + message + "&terms=" + terms,
-            data: "name=" + name + "&email=" + email + "&message=" + message,
-            success: function(text) {
-                if (text == "success") {
-                    cformSuccess();
-                } else {
-                    cformError();
-                    csubmitMSG(false, text);
-                }
-            }
-        });
+        // $.ajax({
+        //     type: "POST",
+        //     url: "php/contactform-process.php",
+        //     // data: "name=" + name + "&email=" + email + "&message=" + message + "&terms=" + terms,
+        //     data: "name=" + name + "&email=" + email + "&message=" + message,
+        //     success: function(text) {
+        //         if (text == "success") {
+        //             cformSuccess();
+        //         } else {
+        //             cformError();
+        //             csubmitMSG(false, text);
+        //         }
+        //     }
+        // });
 	}
 
     function cformSuccess() {
