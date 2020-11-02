@@ -9,6 +9,15 @@
 
 	/* Preloader */
 	$(window).on('load', function() {
+		
+		if(window.innerWidth <= 991) {
+		      var yourImg = document.getElementById('logo');
+		      if(yourImg && yourImg.style) {
+			  yourImg.style.height = '90px';
+			  yourImg.style.width = '90px';
+		      }
+		}
+		
 		var preloaderFadeOutTime = 500;
 		function hidePreloader() {
 			var preloader = $('.spinner-wrapper');
